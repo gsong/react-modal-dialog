@@ -2,10 +2,17 @@ import * as React from "react";
 
 export const useModal = () => {
   const originalStyles = React.useRef<OriginalStyles>({
-    overflow: document.documentElement.style.overflow,
-    scrollbarGutter: document.documentElement.style.scrollbarGutter,
+    overflow: "",
+    scrollbarGutter: "",
   });
   const ref = React.useRef<HTMLDialogElement>(null);
+
+  React.useEffect(() => {
+    originalStyles.current = {
+      overflow: document.documentElement.style.overflow,
+      scrollbarGutter: document.documentElement.style.scrollbarGutter,
+    };
+  }, []);
 
   const openModal = React.useCallback(
     (
@@ -67,13 +74,17 @@ export const useModal = () => {
 };
 
 const disableBodyScroll = () => {
-  document.documentElement.style.overflow = "hidden";
-  document.documentElement.style.scrollbarGutter = "stable";
+  if (typeof window !== "undefined") {
+    document.documentElement.style.overflow = "hidden";
+    document.documentElement.style.scrollbarGutter = "stable";
+  }
 };
 
 const enableBodyScroll = ({ overflow, scrollbarGutter }: OriginalStyles) => {
-  document.documentElement.style.overflow = overflow;
-  document.documentElement.style.scrollbarGutter = scrollbarGutter;
+  if (typeof window !== "undefined") {
+    document.documentElement.style.overflow = overflow;
+    document.documentElement.style.scrollbarGutter = scrollbarGutter;
+  }
 };
 
 const clickedInCurrentTarget = (
@@ -90,7 +101,7 @@ interface OriginalStyles {
   scrollbarGutter: string;
 }
 
-interface ModalProps {
+interface ModalProps extends React.HTMLAttributes<HTMLDialogElement> {
   allowDismiss?: boolean;
   onDismiss?: (event: React.MouseEvent<HTMLDialogElement, MouseEvent>) => void;
   onCancel?: (event: React.SyntheticEvent<HTMLDialogElement, Event>) => void;
