@@ -22,11 +22,13 @@
   },
   "scripts": {
     "build": "duel --dirs",
+    "prebuild": "run-s clean:build",
     "clean": "run-p clean:**",
     "clean:build": "rimraf dist",
     "clean:node_modules": "rimraf node_modules",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "release": "pnpm publish --access public",
+    "prerelease": "run-s lint typecheck build",
     "typecheck": "tsc --noEmit"
   },
   "files": [
