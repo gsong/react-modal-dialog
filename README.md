@@ -22,6 +22,7 @@ function App() {
       <button onClick={() => openModal({ disableBodyScroll: false })}>
         Open Modal
       </button>
+
       <Modal
         allowDismiss={true}
         onDismiss={() => console.debug("Dismissed")}
@@ -40,24 +41,26 @@ export default App;
 
 ## API
 
-The `useModal` hook returns three values:
+The `useModal` hook returns an object with the following properties:
 
-- Modal: The modal component.
-- openModal: A function to open the modal.
-- closeModal: A function to close the modal.
+- `Modal`: The modal component.
+- `openModal`: A function to open the modal.
+- `closeModal`: A function to close the modal.
 
 ### Modal
 
 #### Props
 
-- `allowDismiss?: boolean;` // Allow the modal to be dismissed by clicking
-  outside of it.
-- `onDismiss?: (event: React.MouseEvent<HTMLDialogElement, MouseEvent>) =>
-void;` // Called when the modal is dismissed.
-- `onCancel?: (event: React.SyntheticEvent<HTMLDialogElement, Event>) =>
-void;` // Called when the modal is canceled.
-- `onClose?: (event: React.SyntheticEvent<HTMLDialogElement, Event>) =>
-void;` // Called when the modal is closed.
+```ts
+interface ModalProps extends React.DialogHTMLAttributes<HTMLDialogElement> {
+  allowDismiss?: boolean;
+  onDismiss?: (event: React.MouseEvent<HTMLDialogElement, MouseEvent>) => void;
+}
+```
+
+- `allowDismiss`: Allow the modal to be dismissed by clicking outside of it.
+  Defaults to `false`.
+- `onDismiss`: Called when the modal is dismissed.
 
 ### openModal
 

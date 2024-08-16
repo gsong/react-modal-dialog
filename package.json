@@ -1,6 +1,6 @@
 {
   "name": "@gsong/react-modal-dialog",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "No-frills modal <dialog> for React",
   "license": "MIT",
   "repository": "github:gsong/react-modal-dialog",

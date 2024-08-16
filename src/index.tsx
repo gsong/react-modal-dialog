@@ -37,7 +37,6 @@ export const useModal = () => {
     return function Modal({
       allowDismiss = false,
       onDismiss = () => {},
-      onCancel = () => {},
       onClose = () => {},
       ...props
     }: React.PropsWithChildren<ModalProps>) {
@@ -53,9 +52,6 @@ export const useModal = () => {
               event.currentTarget.close();
               onDismiss(event);
             }
-          }}
-          onCancel={(event) => {
-            onCancel(event);
           }}
           onClose={(event) => {
             if (ref.current) {
@@ -101,9 +97,7 @@ interface OriginalStyles {
   scrollbarGutter: string;
 }
 
-interface ModalProps extends React.HTMLAttributes<HTMLDialogElement> {
+interface ModalProps extends React.DialogHTMLAttributes<HTMLDialogElement> {
   allowDismiss?: boolean;
   onDismiss?: (event: React.MouseEvent<HTMLDialogElement, MouseEvent>) => void;
-  onCancel?: (event: React.SyntheticEvent<HTMLDialogElement, Event>) => void;
-  onClose?: (event: React.SyntheticEvent<HTMLDialogElement, Event>) => void;
 }
