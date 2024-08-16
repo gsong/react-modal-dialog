@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": ["es2022", "dom", "dom.iterable"],
+    "declaration": true,
+    "module": "NodeNext",
+    "sourceMap": true,
+    "declarationMap": true,
+
+    "outDir": "dist"
+  },
+  "include": ["src"]
+}
