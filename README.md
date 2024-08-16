@@ -1,63 +1,79 @@
-# node-module-boilerplate
+# @gsong/react-modal-dialog
 
-> Boilerplate to kickstart creating a Node.js module
-
-This is what I use for [my own modules](https://www.npmjs.com/~sindresorhus).
-
-Also check out [`node-cli-boilerplate`](https://github.com/sindresorhus/node-cli-boilerplate).
-
-## Getting started
-
-**Click the "Use this template" button.**
-
-Alternatively, create a new directory and then run:
-
-```sh
-curl -fsSL https://github.com/sindresorhus/node-module-boilerplate/archive/main.tar.gz | tar -xz --strip-components=1
-```
-
----
-
-**Remove everything from here and above**
-
----
-
-# unicorn-fun
-
-> My awesome module
+A no-frills React modal [`<dialog>`](dialog) component, with types. Works with
+both ESM and CJS.
 
 ## Install
 
 ```sh
-npm install unicorn-fun
+{pnpm,npm,yarn} install @gsong/react-modal-dialog
 ```
 
 ## Usage
 
 ```js
-import unicornFun from 'unicorn-fun';
+import { useModal } from "@gsong/react-modal-dialog";
 
-unicornFun('unicorns');
-//=> 'unicorns & rainbows'
+function App() {
+  const { Modal, openModal, closeModal } = useModal();
+
+  return (
+    <div style={{ height: "200vh" }}>
+      <button onClick={() => openModal({ disableBodyScroll: false })}>
+        Open Modal
+      </button>
+      <Modal
+        allowDismiss={true}
+        onDismiss={() => console.debug("Dismissed")}
+        onCancel={() => console.debug("Canceled")}
+        onClose={() => console.debug("Closed")}
+      >
+        Modal content
+        <button onClick={closeModal}>Close Modal</button>
+      </Modal>
+    </div>
+  );
+}
+
+export default App;
 ```
 
 ## API
 
-### unicornFun(input, options?)
+The `useModal` hook returns three values:
 
-#### input
+- Modal: The modal component.
+- openModal: A function to open the modal.
+- closeModal: A function to close the modal.
 
-Type: `string`
+### Modal
 
-Lorem ipsum.
+#### Props
 
-#### options
+- `allowDismiss?: boolean;` // Allow the modal to be dismissed by clicking
+  outside of it.
+- `onDismiss?: (event: React.MouseEvent<HTMLDialogElement, MouseEvent>) =>
+void;` // Called when the modal is dismissed.
+- `onCancel?: (event: React.SyntheticEvent<HTMLDialogElement, Event>) =>
+void;` // Called when the modal is canceled.
+- `onClose?: (event: React.SyntheticEvent<HTMLDialogElement, Event>) =>
+void;` // Called when the modal is closed.
 
-Type: `object`
+### openModal
 
-##### postfix
+```ts
+openModal: (options?: {
+    disableBodyScroll: boolean;
+}) => void;
+```
 
-Type: `string`\
-Default: `'rainbows'`
+`disableBodyScroll` is `true` by default, which prevents the body from
+scrolling when the modal is open.
 
-Lorem ipsum.
+### closeModal
+
+```ts
+closeModal: () => void;
+```
+
+[dialog]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
