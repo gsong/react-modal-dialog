@@ -1,20 +1,22 @@
-import * as React from "react";
+import type React from "react";
+
+import { useCallback, useEffect, useMemo, useRef } from "react";
 
 export const useModal = () => {
-  const originalStyles = React.useRef<OriginalStyles>({
+  const originalStyles = useRef<OriginalStyles>({
     overflow: "",
     scrollbarGutter: "",
   });
-  const ref = React.useRef<HTMLDialogElement>(null);
+  const ref = useRef<HTMLDialogElement>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     originalStyles.current = {
       overflow: document.documentElement.style.overflow,
       scrollbarGutter: document.documentElement.style.scrollbarGutter,
     };
   }, []);
 
-  const openModal = React.useCallback(
+  const openModal = useCallback(
     (
       { disableBodyScroll: _disableBodyScroll } = { disableBodyScroll: true },
     ) => {
@@ -29,11 +31,11 @@ export const useModal = () => {
     [],
   );
 
-  const closeModal = React.useCallback(() => {
+  const closeModal = useCallback(() => {
     ref.current?.close();
   }, []);
 
-  const Modal = React.useMemo(() => {
+  const Modal = useMemo(() => {
     return function Modal({
       allowDismiss = false,
       onDismiss = () => {},
