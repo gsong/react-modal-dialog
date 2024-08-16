@@ -1,6 +1,6 @@
 # @gsong/react-modal-dialog
 
-A no-frills React modal [`<dialog>`](dialog) component, with types. Works with
+A no-frills React modal [`<dialog>`][dialog] component, with types. Works with
 both ESM and CJS.
 
 ## Install
