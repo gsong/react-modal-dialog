@@ -1,0 +1,27 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "build/**"]
+    },
+
+    "release": { "cache": false },
+
+    "clean": { "cache": false },
+    "clean:node_modules": { "cache": false },
+
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^build"]
+    },
+
+    "test": { "dependsOn": ["^build"] },
+
+    "lint": { "dependsOn": ["^build", "topo"] },
+    "typecheck": { "dependsOn": ["^build", "topo"] },
+
+    "topo": { "dependsOn": ["^topo"] }
+  }
+}

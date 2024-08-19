@@ -1,0 +1,62 @@
+{
+  "name": "@gsong/react-modal-dialog",
+  "version": "2.0.0-unstable.0",
+  "description": "No-frills modal <dialog> for React",
+  "license": "MIT",
+  "repository": "github:gsong/react-modal-dialog",
+  "author": {
+    "name": "George Song",
+    "email": "george@gsong.dev",
+    "url": "https://gsong.dev"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs"
+    }
+  },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "duel --dirs",
+    "prebuild": "run-s clean:build",
+    "clean": "run-p clean:**",
+    "clean:build": "rimraf dist .turbo",
+    "clean:node_modules": "rimraf node_modules",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
+    "release": "pnpm publish --access public",
+    "prerelease": "run-s lint typecheck build",
+    "typecheck": "tsc --noEmit"
+  },
+  "files": [
+    "./dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "react",
+    "modal",
+    "dialog"
+  ],
+  "devDependencies": {
+    "@eslint/compat": "^1.1.1",
+    "@knighted/duel": "^1.0.8",
+    "@types/eslint-plugin-jsx-a11y": "^6.9.0",
+    "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.9.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "globals": "^15.9.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.3.3",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.1.0"
+  }
+}

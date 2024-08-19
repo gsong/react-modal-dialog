@@ -1,3 +1,5 @@
+.turbo/
+build/
 dist/
 
 pnpm-lock.yaml
