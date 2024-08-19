@@ -1,7 +1,19 @@
 # @gsong/react-modal-dialog
 
-A no-frills React modal [`<dialog>`][dialog] component, with types. Works with
-both ESM and CJS.
+![NPM Version](https://img.shields.io/npm/v/%40gsong%2Freact-modal-dialog)
+
+A no-frills React modal [`<dialog>`][dialog] component. In addition to default
+modal dialog behaviors, the component also disables body scrolling when the
+modal is open.
+
+## Features
+
+- Types
+- Works with ESM and CJS
+- Server-side rendering (SSR) compatible
+- Click outside the modal to dismiss (default off)
+- Prevent body scrolling when the modal is open (default on)
+- BYOS: Bring your own styles 🧑‍🎤
 
 ## Install
 
@@ -19,15 +31,15 @@ function App() {
 
   return (
     <div style={{ height: "200vh" }}>
-      <button onClick={() => openModal({ disableBodyScroll: false })}>
-        Open Modal
-      </button>
+      <button onClick={openModal}>Open Modal</button>
 
       <Modal
-        allowDismiss={true}
+        allowBodyScroll
+        allowDismiss
         onDismiss={() => console.debug("Dismissed")}
         onCancel={() => console.debug("Canceled")}
         onClose={() => console.debug("Closed")}
+        className="tailwind-stuff"
       >
         Modal content
         <button onClick={closeModal}>Close Modal</button>
@@ -53,11 +65,14 @@ The `useModal` hook returns an object with the following properties:
 
 ```ts
 interface ModalProps extends React.DialogHTMLAttributes<HTMLDialogElement> {
+  allowBodyScroll?: boolean;
   allowDismiss?: boolean;
   onDismiss?: (event: React.MouseEvent<HTMLDialogElement, MouseEvent>) => void;
 }
 ```
 
+- `allowBodyScroll`: Allow the body to scroll when the modal is open. Defaults
+  to `false`.
 - `allowDismiss`: Allow the modal to be dismissed by clicking outside of it.
   Defaults to `false`.
 - `onDismiss`: Called when the modal is dismissed.
@@ -65,18 +80,31 @@ interface ModalProps extends React.DialogHTMLAttributes<HTMLDialogElement> {
 ### openModal
 
 ```ts
-openModal: (options?: {
-    disableBodyScroll: boolean;
-}) => void;
+openModal: () => void;
 ```
-
-`disableBodyScroll` is `true` by default, which prevents the body from
-scrolling when the modal is open.
 
 ### closeModal
 
 ```ts
 closeModal: () => void;
+```
+
+## v1 to v2 Migration
+
+Breaking changes and what to do about them.
+
+### Control Body Scrolling
+
+Instead of this:
+
+```js
+openModal({ disableBodyScroll: false });
+```
+
+Do this:
+
+```js
+<Modal allowBodyScroll />
 ```
 
 [dialog]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
