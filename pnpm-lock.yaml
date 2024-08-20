@@ -75,7 +75,7 @@ importers:
   remix-example:
     dependencies:
       '@gsong/react-modal-dialog':
-        specifier: workspace:2.0.0-unstable.0
+        specifier: workspace:2.0.0-beta.0
         version: link:../package
       '@remix-run/node':
         specifier: ^2.11.2

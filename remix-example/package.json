@@ -11,7 +11,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@gsong/react-modal-dialog": "workspace:2.0.0-unstable.0",
+    "@gsong/react-modal-dialog": "workspace:2.0.0-beta.0",
     "@remix-run/node": "^2.11.2",
     "@remix-run/react": "^2.11.2",
     "@remix-run/serve": "^2.11.2",
