@@ -1,6 +1,7 @@
 # @gsong/react-modal-dialog
 
 ![NPM Version](https://img.shields.io/npm/v/%40gsong%2Freact-modal-dialog)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/gsong/react-modal-dialog/validate.yaml?label=tests)
 
 A no-frills React modal [`<dialog>`][dialog] component. In addition to default
 modal dialog behaviors, the component also disables body scrolling when the

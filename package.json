@@ -12,6 +12,8 @@
     "prepare": "is-ci || husky"
   },
   "devDependencies": {
+    "@action-validator/cli": "^0.6.0",
+    "@action-validator/core": "^0.6.0",
     "@eslint/compat": "^1.1.1",
     "@types/eslint-plugin-jsx-a11y": "^6.9.0",
     "@types/is-ci": "^3.0.4",
