@@ -1,48 +1,44 @@
 import type { MetaFunction } from "@remix-run/node";
 
+import { useModal } from "@gsong/react-modal-dialog";
+
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Modal Demo" },
+    { name: "description", content: "@gsong/react-modal-dialog demo" },
   ];
 };
 
 export default function Index() {
+  const { Modal, openModal, closeModal } = useModal();
+
   return (
-    <div className="font-sans p-4">
-      <h1 className="text-3xl">Welcome to Remix</h1>
-      <ul className="list-disc mt-4 pl-6 space-y-2">
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/quickstart"
-            rel="noreferrer"
+    <div style={{ height: "200vh" }}>
+      <button
+        onClick={openModal}
+        className="bg-blue-500 text-white p-2 rounded"
+      >
+        Open Modal
+      </button>
+
+      <Modal
+        allowBodyScroll
+        allowDismiss
+        onDismiss={() => console.debug("Dismissed")}
+        onCancel={() => console.debug("Canceled")}
+        onClose={() => console.debug("Closed")}
+        className="rounded-lg shadow-xl p-8 backdrop:bg-purple-500 backdrop:bg-opacity-50 backdrop:backdrop-blur-sm"
+      >
+        <div className="flex flex-col">
+          <div className="text-lg font-semibold mb-20">Modal content</div>
+          <button
+            onClick={closeModal}
+            className="bg-gray-500 text-white p-2 rounded"
           >
-            5m Quick Start
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/tutorial"
-            rel="noreferrer"
-          >
-            30m Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/docs"
-            rel="noreferrer"
-          >
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+            Close Modal
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }
