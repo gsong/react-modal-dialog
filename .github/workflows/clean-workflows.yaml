@@ -1,0 +1,54 @@
+name: Clean Up Obsolete Workflows
+
+on:
+  schedule:
+    - cron: "0 0 1 * *" # Run monthly on the 1st day of each month at midnight UTC
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Clean up obsolete workflows
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          # Get all workflow files in the current repository
+          current_workflows=$(find .github/workflows -print0 -name "*.yml" -o -name "*.yaml" | xargs -0 -I {} basename {})
+
+          # Get all workflows from the Actions tab
+          all_workflows=$(gh api repos/${{ github.repository }}/actions/workflows | jq -r '.workflows[].path' | xargs -I {} basename {})
+
+          # Find obsolete workflows
+          obsolete_workflows=$(comm -23 <(echo "$all_workflows" | sort) <(echo "$current_workflows" | sort) | grep -v "dependabot-updates" || true)
+
+          # Check if there are any obsolete workflows
+          if [ -z "$obsolete_workflows" ]; then
+            echo "No obsolete workflows found. Exiting."
+            exit 0
+          fi
+
+          # Delete runs of obsolete workflows
+          for workflow in $obsolete_workflows; do
+            echo "Cleaning up obsolete workflow: $workflow"
+            runs=$(gh run list --workflow "$workflow" --json databaseId --jq '.[].databaseId')
+            if [ -z "$runs" ]; then
+              echo "No runs found for workflow: $workflow"
+              continue
+            fi
+            for run_id in $runs; do
+              gh run delete "$run_id"
+              echo "Deleted run $run_id of workflow $workflow"
+            done
+          done
+
+          echo "Cleanup completed successfully."
+          exit 0
