@@ -15,7 +15,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@gsong/react-modal-dialog": "workspace:2.0.0-beta.0",
+    "@gsong/react-modal-dialog": "workspace:*",
     "@remix-run/node": "^2.11.2",
     "@remix-run/react": "^2.11.2",
     "@remix-run/serve": "^2.11.2",
@@ -26,7 +26,7 @@
   "devDependencies": {
     "@playwright/test": "^1.46.1",
     "@remix-run/dev": "^2.11.2",
-    "@types/react": "^18.3.3",
+    "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^8.2.0",
     "@typescript-eslint/parser": "^8.2.0",

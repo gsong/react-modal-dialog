@@ -18,7 +18,7 @@
     "@types/eslint-plugin-jsx-a11y": "^6.9.0",
     "@types/is-ci": "^3.0.4",
     "@types/node": "^22.4.1",
-    "@types/react": "^18.3.3",
+    "@types/react": "^18.3.4",
     "concurrently": "^8.2.2",
     "eslint": "^9.9.0",
     "eslint-config-prettier": "^9.1.0",
