@@ -87,7 +87,7 @@ const enableBodyScroll = ({ overflow, scrollbarGutter }: OriginalStyles) => {
 };
 
 const clickedInCurrentTarget = (
-  event: React.MouseEvent<HTMLDialogElement, MouseEvent>
+  event: React.MouseEvent<HTMLDialogElement, MouseEvent>,
 ) => {
   const { currentTarget, clientX, clientY } = event;
 

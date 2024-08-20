@@ -22,12 +22,13 @@ export default function Index() {
       </button>
 
       <Modal
-        allowBodyScroll
+        // allowBodyScroll
         allowDismiss
         onDismiss={() => console.debug("Dismissed")}
         onCancel={() => console.debug("Canceled")}
         onClose={() => console.debug("Closed")}
         className="rounded-lg shadow-xl p-8 backdrop:bg-purple-500 backdrop:bg-opacity-50 backdrop:backdrop-blur-sm"
+        data-testid="modal"
       >
         <div className="flex flex-col">
           <div className="text-lg font-semibold mb-20">Modal content</div>

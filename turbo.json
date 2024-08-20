@@ -17,6 +17,7 @@
       "dependsOn": ["^build"]
     },
 
+    "e2e": { "dependsOn": ["build"] },
     "test": { "dependsOn": ["^build"] },
 
     "lint": { "dependsOn": ["^build", "topo"] },

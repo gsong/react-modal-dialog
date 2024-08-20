@@ -7,7 +7,10 @@
     }
   },
   "devDependencies": {
+    "@types/is-ci": "^3.0.4",
+    "@types/node": "^22.4.1",
     "@types/react": "^18.3.3",
+    "is-ci": "^3.0.1",
     "react": "^18.3.1",
     "turbo": "^2.0.14"
   }
