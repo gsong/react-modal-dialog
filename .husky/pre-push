@@ -1,0 +1,2 @@
+pnpm run lint
+pnpm turbo run lint typecheck e2e --output-logs=errors-only

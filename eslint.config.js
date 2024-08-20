@@ -6,6 +6,7 @@ import jsxA11y from "eslint-plugin-jsx-a11y";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
+import turbo from "eslint-plugin-turbo";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
@@ -83,6 +84,24 @@ const config = tseslint.config(
         { allowShortCircuit: true, allowTernary: true },
       ],
     },
+  },
+
+  {
+    name: "node",
+    files: ["**/*.{js,cjs,mjs}"],
+
+    languageOptions: {
+      globals: globals.node,
+    },
+  },
+
+  {
+    name: "turborepo",
+    plugins: {
+      turbo,
+    },
+    settings: { ...turbo.configs.recommended.settings },
+    rules: { ...turbo.configs.recommended.rules },
   },
 
   {
