@@ -26,7 +26,7 @@ modal is open.
 ```js
 import { useModal } from "@gsong/react-modal-dialog";
 
-export default function Index() {
+export default function Demo() {
   const { Modal, openModal, closeModal } = useModal();
 
   return (

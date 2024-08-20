@@ -1,15 +1,8 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { ModalProps } from "@gsong/react-modal-dialog";
 
 import { useModal } from "@gsong/react-modal-dialog";
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "Modal Demo" },
-    { name: "description", content: "@gsong/react-modal-dialog demo" },
-  ];
-};
-
-export default function Index() {
+export const TestModal = (props: ModalProps) => {
   const { Modal, openModal, closeModal } = useModal();
 
   return (
@@ -22,13 +15,9 @@ export default function Index() {
       </button>
 
       <Modal
-        // allowBodyScroll
-        allowDismiss
-        onDismiss={() => console.debug("Dismissed")}
-        onCancel={() => console.debug("Canceled")}
-        onClose={() => console.debug("Closed")}
         className="rounded-lg shadow-xl p-8 backdrop:bg-purple-500 backdrop:bg-opacity-50 backdrop:backdrop-blur-sm"
         data-testid="modal"
+        {...props}
       >
         <div className="flex flex-col">
           <div className="text-lg font-semibold mb-20">Modal content</div>
@@ -42,4 +31,4 @@ export default function Index() {
       </Modal>
     </div>
   );
-}
+};

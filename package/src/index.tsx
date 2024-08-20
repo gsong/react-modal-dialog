@@ -100,7 +100,8 @@ interface OriginalStyles {
   scrollbarGutter: string;
 }
 
-interface ModalProps extends React.DialogHTMLAttributes<HTMLDialogElement> {
+export interface ModalProps
+  extends React.DialogHTMLAttributes<HTMLDialogElement> {
   allowBodyScroll?: boolean;
   allowDismiss?: boolean;
   onDismiss?: (event: React.MouseEvent<HTMLDialogElement, MouseEvent>) => void;
