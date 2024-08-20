@@ -1,0 +1,40 @@
+name: Purge closed PR cache
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Cleanup
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          BRANCH: refs/pull/${{ github.event.pull_request.number }}/merge
+        run: |
+          set -euo pipefail
+
+          echo "Installing GitHub CLI extension..."
+          gh extension install actions/gh-actions-cache
+
+          echo "Fetching list of cache keys..."
+          cacheKeysForPR=$(gh actions-cache list -R "$REPO" -B "$BRANCH" -L 100 | cut -f 1)
+
+          if [ -z "$cacheKeysForPR" ]; then
+            echo "No caches found to purge."
+            exit 0
+          fi
+
+          echo "Deleting caches..."
+          echo "$cacheKeysForPR" | while read -r cacheKey; do
+            if [ -n "$cacheKey" ]; then
+              echo "Deleting cache key: $cacheKey"
+              gh actions-cache delete "$cacheKey" -R "$REPO" -B "$BRANCH" --confirm || echo "Failed to delete cache key: $cacheKey"
+            fi
+          done
+
+          echo "Cache purge complete."

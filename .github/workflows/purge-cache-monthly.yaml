@@ -1,0 +1,38 @@
+name: Purge Cache
+on:
+  schedule:
+    - cron: "0 0 1 * *" # Run monthly on the 1st day of each month at midnight UTC
+  workflow_dispatch:
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Fetch and delete caches
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          echo "Installing GitHub CLI extension..."
+          gh extension install actions/gh-actions-cache
+
+          echo "Fetching list of cache keys..."
+          cacheKeys=$(gh actions-cache list -R ${{ github.repository }} -L 100 | cut -f 1)
+
+          if [ -z "$cacheKeys" ]; then
+            echo "No caches found to purge."
+            exit 0
+          fi
+
+          echo "Purging caches..."
+          echo "$cacheKeys" | while read -r cacheKey; do
+            if [ -n "$cacheKey" ]; then
+              echo "Deleting cache key: $cacheKey"
+              gh actions-cache delete "$cacheKey" -R ${{ github.repository }} --confirm || echo "Failed to purge cache key: $cacheKey"
+            fi
+          done
+
+          echo "Cache purge complete."
