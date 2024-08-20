@@ -1,6 +1,6 @@
 import type React from "react";
 
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 export const useModal = () => {
   const originalStyles = useRef<OriginalStyles>({
@@ -8,6 +8,7 @@ export const useModal = () => {
     scrollbarGutter: "",
   });
   const ref = useRef<HTMLDialogElement>(null);
+  const [allowBodyScroll, setAllowBodyScroll] = useState(false);
 
   useEffect(() => {
     originalStyles.current = {
@@ -16,20 +17,15 @@ export const useModal = () => {
     };
   }, []);
 
-  const openModal = useCallback(
-    (
-      { disableBodyScroll: _disableBodyScroll } = { disableBodyScroll: true },
-    ) => {
-      if (ref.current) {
-        ref.current.showModal();
+  const openModal = useCallback(() => {
+    if (ref.current) {
+      ref.current.showModal();
 
-        if (_disableBodyScroll) {
-          disableBodyScroll();
-        }
+      if (!allowBodyScroll) {
+        disableBodyScroll();
       }
-    },
-    [],
-  );
+    }
+  }, [allowBodyScroll]);
 
   const closeModal = useCallback(() => {
     ref.current?.close();
@@ -37,11 +33,16 @@ export const useModal = () => {
 
   const Modal = useMemo(() => {
     return function Modal({
+      allowBodyScroll = false,
       allowDismiss = false,
       onDismiss = () => {},
       onClose = () => {},
       ...props
     }: React.PropsWithChildren<ModalProps>) {
+      useEffect(() => {
+        setAllowBodyScroll(allowBodyScroll);
+      }, [allowBodyScroll]);
+
       return (
         // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
         <dialog
@@ -86,7 +87,7 @@ const enableBodyScroll = ({ overflow, scrollbarGutter }: OriginalStyles) => {
 };
 
 const clickedInCurrentTarget = (
-  event: React.MouseEvent<HTMLDialogElement, MouseEvent>,
+  event: React.MouseEvent<HTMLDialogElement, MouseEvent>
 ) => {
   const { currentTarget, clientX, clientY } = event;
 
@@ -100,6 +101,7 @@ interface OriginalStyles {
 }
 
 interface ModalProps extends React.DialogHTMLAttributes<HTMLDialogElement> {
+  allowBodyScroll?: boolean;
   allowDismiss?: boolean;
   onDismiss?: (event: React.MouseEvent<HTMLDialogElement, MouseEvent>) => void;
 }
