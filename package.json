@@ -1,6 +1,11 @@
 {
   "name": "react-modal-project",
   "packageManager": "pnpm@9.7.1",
+  "pnpm": {
+    "overrides": {
+      "remix-example>eslint": "8"
+    }
+  },
   "devDependencies": {
     "@types/react": "^18.3.3",
     "react": "^18.3.1",
