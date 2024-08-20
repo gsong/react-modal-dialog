@@ -18,7 +18,6 @@
     },
 
     "e2e": { "dependsOn": ["build"] },
-    "test": { "dependsOn": ["^build"] },
 
     "lint": { "dependsOn": ["^build", "topo"] },
     "typecheck": { "dependsOn": ["^build", "topo"] },
