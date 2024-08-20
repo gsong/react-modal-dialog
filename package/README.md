@@ -1,7 +1,7 @@
 # @gsong/react-modal-dialog
 
-![NPM Version](https://img.shields.io/npm/v/%40gsong%2Freact-modal-dialog)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/gsong/react-modal-dialog/validate.yaml?label=tests)
+[![NPM Version](https://img.shields.io/npm/v/%40gsong%2Freact-modal-dialog)](https://www.npmjs.com/package/@gsong/react-modal-dialog)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/gsong/react-modal-dialog/validate.yaml?label=tests)](https://github.com/gsong/react-modal-dialog/actions/workflows/validate.yaml)
 
 A no-frills React modal [`<dialog>`][dialog] component. In addition to default
 modal dialog behaviors, the component also disables body scrolling when the
@@ -19,7 +19,7 @@ modal is open.
 ## Install
 
 ```sh
-{pnpm,npm,yarn} install @gsong/react-modal-dialog
+{pnpm,npm,yarn} add @gsong/react-modal-dialog
 ```
 
 ## Usage
