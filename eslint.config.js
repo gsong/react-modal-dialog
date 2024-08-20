@@ -16,7 +16,7 @@ const config = tseslint.config(
 
   {
     // https://eslint.org/docs/latest/use/configure/configuration-files#globally-ignoring-files-with-ignores
-    ignores: ["dist"],
+    ignores: ["**/build", "**/dist"],
   },
 
   {
