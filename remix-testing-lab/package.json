@@ -1,5 +1,5 @@
 {
-  "name": "remix-example",
+  "name": "remix-testing-lab",
   "private": true,
   "sideEffects": false,
   "type": "module",
@@ -9,8 +9,8 @@
     "e2e": "playwright test",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "prepare": "run-script-os",
-    "prepare:default": "playwright install --with-deps chromium firefox webkit",
-    "prepare:linux": "is-ci || playwright install chromium firefox webkit",
+    "prepare:default": "playwright install --with-deps",
+    "prepare:linux": "is-ci || playwright install",
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc"
   },

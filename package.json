@@ -2,6 +2,14 @@
   "name": "react-modal-project",
   "packageManager": "pnpm@9.7.1",
   "type": "module",
+  "scripts": {
+    "clean": "run-p clean:*",
+    "clean:build": "turbo run clean:build; rm -rf .turbo",
+    "clean:node_modules": "turbo run clean:node_modules; rimraf node_modules",
+    "lint": "run-p lint:*",
+    "lint:eslint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
+    "lint:prettier": "prettier --cache --check ."
+  },
   "devDependencies": {
     "@eslint/compat": "^1.1.1",
     "@types/eslint-plugin-jsx-a11y": "^6.9.0",
