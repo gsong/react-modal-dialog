@@ -126,9 +126,6 @@ const config = tseslint.config(
             ["^react", "^@remix-run"],
             // Things that start with a letter (or digit or underscore), or `@` followed by a letter.
             ["^@?\\w"],
-            // Workspace packages
-            ["^@asd"],
-            // Absolute imports and other imports such as Vue-style `@/foo`.
             // Anything not matched in another group.
             ["^"],
             // Relative imports.
