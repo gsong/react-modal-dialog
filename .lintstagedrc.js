@@ -1,4 +1,5 @@
 import { execSync } from "node:child_process";
+import fs from "node:fs";
 import { basename, dirname, join, resolve } from "node:path";
 import url from "node:url";
 
@@ -17,7 +18,11 @@ export default {
 
 function processNonJsFiles(filenames) {
   const filteredFiles = filenames
-    .filter((filename) => !basename(filename).startsWith("Dockerfile"))
+    .filter(
+      (filename) =>
+        !fs.lstatSync(filename).isSymbolicLink() &&
+        !basename(filename).startsWith("Dockerfile"),
+    )
     .join(" ");
 
   return `pnpm prettier --ignore-unknown --write ${filteredFiles}`;
