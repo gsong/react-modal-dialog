@@ -7,6 +7,8 @@ A no-frills React modal [`<dialog>`][dialog] component. In addition to default
 modal dialog behaviors, the component also disables body scrolling when the
 modal is open.
 
+Heavily inspired by <https://web.dev/articles/building/a-dialog-component>.
+
 ## Features
 
 - Types

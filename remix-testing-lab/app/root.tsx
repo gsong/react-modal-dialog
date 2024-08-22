@@ -9,8 +9,6 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import "./tailwind.css";
-
 export const meta: MetaFunction = () => {
   return [
     { title: "Modal Demo" },
@@ -31,7 +29,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <nav className="py-4">
           <ul className="flex gap-6">
             <li>
-              <Link to="/demo">Code sample in README</Link>
+              <a href="/demo">Code sample in README</a>
             </li>
             <li>
               <Link to="/default">Default</Link>
@@ -41,6 +39,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </li>
             <li>
               <Link to="/allow-dismiss">Allow dismiss</Link>
+            </li>
+            <li>
+              <a href="/bake-off">Modal, dialog, popover bake-off</a>
             </li>
           </ul>
         </nav>
