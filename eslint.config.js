@@ -39,7 +39,7 @@ const config = tseslint.config(
       jsxA11y.flatConfigs.recommended,
     ],
 
-    plugins: { "react-hooks": fixupPluginRules(reactHooks) },
+    plugins: { "react-hooks": reactHooks },
     rules: { ...reactHooks.configs.recommended.rules },
 
     settings: {
