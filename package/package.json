@@ -10,6 +10,7 @@
     "url": "https://gsong.dev"
   },
   "type": "module",
+  "main": "./dist/cjs/index.cjs",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
@@ -26,7 +27,9 @@
     "clean": "run-p clean:**",
     "clean:build": "rimraf dist .turbo",
     "clean:node_modules": "rimraf node_modules",
-    "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
+    "lint": "run-p lint:*",
+    "lint:eslint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
+    "lint:exports": "attw --pack .",
     "release": "pnpm publish --access public",
     "prerelease": "run-s lint typecheck build",
     "typecheck": "tsc --noEmit"
@@ -42,6 +45,7 @@
     "dialog"
   ],
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.16.2",
     "@knighted/duel": "^1.0.8"
   },
   "peerDependencies": {
