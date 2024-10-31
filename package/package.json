@@ -45,7 +45,7 @@
     "dialog"
   ],
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.16.2",
+    "@arethetypeswrong/cli": "^0.16.4",
     "@knighted/duel": "^1.0.8"
   },
   "peerDependencies": {
