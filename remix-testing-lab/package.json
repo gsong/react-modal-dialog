@@ -27,7 +27,7 @@
   "devDependencies": {
     "@babel/preset-react": "^7.25.9",
     "@markslides/markdown-it-mermaid": "^0.3.6",
-    "@playwright/test": "^1.48.2",
+    "@playwright/test": "^1.49.0",
     "@remix-run/dev": "^2.14.0",
     "@types/markdown-it": "^14.1.2",
     "@types/react": "^18.3.12",
